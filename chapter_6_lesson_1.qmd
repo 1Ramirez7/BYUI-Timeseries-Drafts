@@ -129,13 +129,13 @@ where $\{w_t\}$ is white noise with zero mean and variance $\sigma_w^2$, and the
 :::
 
 
-<!-- In the check your understanding below, -->
-<!-- The students write the MA model in terms -->
-<!-- of the backward shift operator. -->
+ In the check your understanding below, 
+ The students write the MA model in terms 
+ of the backward shift operator. 
 
 
 
-<!-- Check your Understanding -->
+ Check your Understanding 
 
 ::: {.callout-tip icon=false title="Check Your Understanding"}
 
@@ -237,7 +237,7 @@ are all greater than 1 in absolute value.
 
 :::
 
-<a id="FittedModelWillBeInvertible">Does</a> this remind you of the test for the stationarity of an $AR(p)$ model?
+FittedModelWillBeInvertible - Does this remind you of the test for the stationarity of an $AR(p)$ model?
 
 Note that the autocovariance function (acvf) will identify a unique $MA(q)$ process only if the process is invertible. Fortunately, the algorithm R uses to estimate an $MA(q)$ process always leads to an invertible model.
 
@@ -252,102 +252,99 @@ $$
 
 where $\beta_1 = 0.7$, $\beta_1 = 0.5$, and $\beta_3 = 0.2$. This shiny app allows you to simulate from this process.
 
-
-```{=html}
- <iframe id="MA3Simulation" src="https://posit.byui.edu/content/edfd752d-58f2-468e-8695-a28a5b4eec6f" style="border: none; width: 100%; height: 1030px" frameborder="0"></iframe>
-```
+shinny content 
 
 
-<!-- The code below is replaced by the shiny app above. -->
+ The code below is replaced by the shiny app above. 
 
 
 
-<!-- ```{r} -->
-<!-- #| code-fold: true -->
-<!-- #| code-summary: "Show the code" -->
+```{r} 
+#| code-fold: true 
+#| code-summary: "Show the code" 
 
-<!-- pacman::p_load("tsibble", "fable", "feasts", -->
-<!--     "tsibbledata", "fable.prophet", "tidyverse", -->
-<!--     "patchwork", "slider", "urca") -->
+pacman::p_load("tsibble", "fable", "feasts", 
+   "tsibbledata", "fable.prophet", "tidyverse", 
+   "patchwork", "slider", "urca") 
 
-<!-- # define the parameters of the simulation -->
-<!-- beta1 <- 0.7 -->
-<!-- beta2 <- 0.5 -->
-<!-- beta3 <- 0.2 -->
+# define the parameters of the simulation 
+beta1 <- 0.7 
+beta2 <- 0.5 
+beta3 <- 0.2 
 
-<!-- # function to compute the autocorrelation -->
-<!-- rho <- function(k, beta) { -->
-<!--   q <- length(beta) - 1 -->
-<!--   if (k > q) ACF <- 0 else { -->
-<!--     s1 <- 0; s2 <- 0 -->
-<!--     for (i in 1:(q-k+1)) s1 <- s1 + beta[i] * beta[i+k] -->
-<!--     for (i in 1:(q+1)) s2 <- s2 + beta[i]^2 -->
-<!--     ACF <- s1 / s2} -->
-<!--   ACF -->
-<!-- } -->
+# function to compute the autocorrelation 
+rho <- function(k, beta) { 
+ q <- length(beta) - 1 
+ if (k > q) ACF <- 0 else { 
+   s1 <- 0; s2 <- 0 
+   for (i in 1:(q-k+1)) s1 <- s1 + beta[i] * beta[i+k] 
+   for (i in 1:(q+1)) s2 <- s2 + beta[i]^2 
+   ACF <- s1 / s2} 
+ ACF 
+} 
 
-<!-- # create the tibble -->
-<!-- acf_dat <- tibble( -->
-<!--   order = 0:10, -->
-<!--   betas = list(c(1, beta1, beta2, beta3)), -->
-<!--   rho.k = map2_dbl(order, betas, ~rho(.x, .y))) -->
+# create the tibble 
+acf_dat <- tibble( 
+ order = 0:10, 
+ betas = list(c(1, beta1, beta2, beta3)), 
+ rho.k = map2_dbl(order, betas, ~rho(.x, .y))) 
 
-<!-- # generate the autocorrelation plot -->
-<!-- acf_dat |> -->
-<!--   ggplot(aes(x = order, y = rho.k)) + -->
-<!--   geom_hline(yintercept = 0, color = "darkgrey") + -->
-<!--   geom_point() + -->
-<!--   labs(y = expression(rho[k]), x = "lag k") + -->
-<!--     labs( -->
-<!--       x = "Time", -->
-<!--       y = "ACF", -->
-<!--       title = "Theoretical ACF for the Simulated MA(3) Process" -->
-<!--     ) + -->
-<!--     theme_bw() + -->
-<!--     theme( -->
-<!--       plot.title = element_text(hjust = 0.5) -->
-<!--     ) -->
-<!-- ``` -->
+# generate the autocorrelation plot 
+acf_dat |> 
+ ggplot(aes(x = order, y = rho.k)) + 
+ geom_hline(yintercept = 0, color = "darkgrey") + 
+ geom_point() + 
+ labs(y = expression(rho[k]), x = "lag k") + 
+   labs( 
+     x = "Time", 
+     y = "ACF", 
+     title = "Theoretical ACF for the Simulated MA(3) Process" 
+   ) + 
+   theme_bw() + 
+   theme( 
+     plot.title = element_text(hjust = 0.5) 
+   ) 
+``` 
 
-<!-- Now, we simulate data from this process. -->
+ Now, we simulate data from this process. 
 
-<!-- ```{r} -->
-<!-- #| code-fold: true -->
-<!-- #| code-summary: "Show the code" -->
+```{r} 
+#| code-fold: true 
+#| code-summary: "Show the code" 
 
-<!-- set.seed(1234) -->
-<!-- dat <- tibble( -->
-<!--   w = rnorm(1000), -->
-<!--   betas = list(c(beta1, beta2, beta3))) |> -->
-<!--   mutate( -->
-<!--     w_lag = slide(w, ~.x, .before = 3, .after = -1), -->
-<!--     w_lag = map(w_lag, ~rev(.x)), -->
-<!--     t = 1:n()) |> -->
-<!--   slice(-c(1:3)) |> -->
-<!--   mutate( -->
-<!--     lag_betas = map2_dbl( -->
-<!--       w_lag, -->
-<!--       betas, -->
-<!--       \(.x, .y) sum(.x *.y)), -->
-<!--     x = w + lag_betas) |> -->
-<!--   tsibble::as_tsibble(index = t) -->
-<!-- autoplot(dat, .var = x) -->
-<!-- ``` -->
+set.seed(1234) 
+dat <- tibble( 
+ w = rnorm(1000), 
+ betas = list(c(beta1, beta2, beta3))) |> 
+ mutate( 
+   w_lag = slide(w, ~.x, .before = 3, .after = -1), 
+   w_lag = map(w_lag, ~rev(.x)), 
+   t = 1:n()) |> 
+ slice(-c(1:3)) |> 
+ mutate( 
+   lag_betas = map2_dbl( 
+     w_lag, 
+     betas, 
+     \(.x, .y) sum(.x *.y)), 
+   x = w + lag_betas) |> 
+ tsibble::as_tsibble(index = t) 
+autoplot(dat, .var = x) 
+``` 
 
-<!-- Here is the acf function computed from the simulated data. -->
+ Here is the acf function computed from the simulated data. 
 
-<!-- ```{r} -->
-<!-- #| code-fold: true -->
-<!-- #| code-summary: "Show the code" -->
+```{r} 
+#| code-fold: true 
+#| code-summary: "Show the code" 
 
-<!-- dat |> -->
-<!--   ACF(y = x) |> -->
-<!--   autoplot() -->
-<!-- ``` -->
+dat |> 
+ ACF(y = x) |> 
+ autoplot() 
+``` 
 
 
 
-<!-- Check Your Understanding -->
+ Check Your Understanding 
 
 ::: {.callout-tip icon=false title="Check Your Understanding"}
 
@@ -396,12 +393,12 @@ For an $AR(p)$ or $MA(q)$ process, we observe the following:
 
 </center>
 
-<!-- https://people.cs.pitt.edu/~milos/courses/cs3750/lectures/class16.pdf -->
+ https://people.cs.pitt.edu/~milos/courses/cs3750/lectures/class16.pdf 
 
-<!-- |      | AR(p)                  | MA(q)                  | ARMA(p,q)                | -->
-<!-- |------|------------------------|------------------------|--------------------------| -->
-<!-- | ACF  | Tails off              | Cuts off after lag $q$ | Tails off                | -->
-<!-- | PACF | Cuts off after lag $p$ | Tails off              | Tails off                | -->
+ |      | AR(p)                  | MA(q)                  | ARMA(p,q)                | 
+ |------|------------------------|------------------------|--------------------------| 
+ | ACF  | Tails off              | Cuts off after lag $q$ | Tails off                | 
+ | PACF | Cuts off after lag $p$ | Tails off              | Tails off                | 
 
 :::
 
@@ -417,7 +414,7 @@ To fit an $MA(q)$ model, we look at the acf to determine if it cuts off after $q
 
 # gdp_ts <- rio::import("https://byuistats.github.io/timeseries/data/gdp_fred.csv") |>
 gdp_ts <- rio::import("data/gdp_fred.csv") |>
-  select(-comments) |>
+#  select(-comments) |>
   mutate(year_over_year = gdp_millions / lag(gdp_millions, 4)) |>
   mutate(quarter = yearquarter(mdy(quarter))) |>
   filter(quarter >= yearquarter(my("Jan 1990")) & quarter < yearquarter(my("Jan 2025"))) |>
@@ -461,7 +458,7 @@ gdp_ts |>
   pacf()
 ```
 
-<!-- Check Your Understanding -->
+ Check Your Understanding 
 
 ::: {.callout-tip icon=false title="Check Your Understanding"}
 
@@ -520,7 +517,7 @@ vessels_ts |>
     theme(plot.title = element_text(hjust = 0.5))
 ```
 
-<!-- Check Your Understanding -->
+ Check Your Understanding 
 
 ::: {.callout-tip icon=false title="Check Your Understanding"}
 
@@ -545,22 +542,11 @@ Practice applying an $MA(q)$ model using the year-over-year amounts.
 
 
 
-::: {.callout-note icon=false}
-
-## Download Homework
-
-<a href="https://byuistats.github.io/timeseries/homework/homework_6_1.qmd" download="homework_6_1.qmd"> homework_6_1.qmd </a>
-
-:::
 
 
 
+solution 1
 
-
-<a href="javascript:showhide('Solutions1')"
-style="font-size:.8em;">MA(q) process in terms of the backward shift operator</a>
-  
-::: {#Solutions1 style="display:none;"}
   
 \begin{align*}
   x_t 
@@ -570,15 +556,13 @@ style="font-size:.8em;">MA(q) process in terms of the backward shift operator</a
     &= \phi_q(\mathbf{B}) w_t
 \end{align*}
 
-:::
 
 
 
 
-<a href="javascript:showhide('Solutions2')"
-style="font-size:.8em;">Simulating an MA(3) process</a>
+solution 2
   
-::: {#Solutions2 style="display:none;"}
+
 
 Set the values of the parameters $n$, $\beta_1$, $\beta_2$, and $\beta_3$ in the simulation to the following:
 $$
@@ -588,22 +572,17 @@ n = 1000, ~~~~~~~~~~~
 \beta_3 = -0.2
 $$
 
-:::
 
 
 
 
 
 
-
-<a href="javascript:showhide('Solutions3')"
-style="font-size:.8em;">Class Activity: Fitting an MA(q) Model to GDP Year-Over-Year Ratios</a>
+solution 3
   
-::: {#Solutions3 style="display:none;"}
 
-<!-- Check Your Understanding -->
+ Check Your Understanding 
 
-::: {.callout-tip icon=false title="Check Your Understanding"}
 
 -   What process would you use to model the year-over-year GDP ratios?
 
@@ -688,17 +667,13 @@ abs(polyroot(c(coeffs |> tail(1), coeffs |> head(-1))))
 
 The model is invertible. (As mentioned [previously](#FittedModelWillBeInvertible), the process by which these are constructed guarantees they will be invertible.)
 
-:::
-
-:::
 
 
 
 
-<a href="javascript:showhide('Solutions4')"
-style="font-size:.8em;">Small-Group Activity: Fitting an MA(q) Model to the Trade Data</a>
+
+solution 4
   
-::: {#Solutions4 style="display:none;"}
     
 ```{r}
 #| code-fold: true
@@ -744,7 +719,6 @@ gdp_ma |>
 
 
 
-:::
 
 
 
