@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.554">
+<meta name="generator" content="quarto-1.6.39">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>BYU-Idaho Time Series - Autoregressive (AR) Models</title>
+<title>Autoregressive (AR) Models – BYU-Idaho Time Series</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -72,12 +72,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d166b450ba5a8e9f7a0ab969bf6592c1.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-dc9ff929994d342fd2034119e2f81dae.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-4d8eee02f33473bdaf141da458b39a65.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -106,7 +106,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
@@ -154,7 +154,7 @@ window.Quarto = {
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -168,7 +168,7 @@ window.Quarto = {
 <span class="menu-text">Resources</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-chapter-1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-chapter-1" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Chapter 1</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-chapter-1">    
@@ -210,7 +210,7 @@ window.Quarto = {
     </ul>
   </li>
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-chapter-2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-chapter-2" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Chapter 2</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-chapter-2">    
@@ -240,7 +240,7 @@ window.Quarto = {
     </ul>
   </li>
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-chapter-3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-chapter-3" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Chapter 3</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-chapter-3">    
@@ -282,7 +282,7 @@ window.Quarto = {
     </ul>
   </li>
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-chapter-4" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-chapter-4" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Chapter 4</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-chapter-4">    
@@ -318,7 +318,7 @@ window.Quarto = {
     </ul>
   </li>
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-chapter-5" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-chapter-5" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Chapter 5</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-chapter-5">    
@@ -360,7 +360,7 @@ window.Quarto = {
     </ul>
   </li>
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-chapter-6" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-chapter-6" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Chapter 6</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-chapter-6">    
@@ -384,7 +384,7 @@ window.Quarto = {
     </ul>
   </li>
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-chapter-7" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-chapter-7" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Chapter 7</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-chapter-7">    
@@ -415,7 +415,7 @@ window.Quarto = {
   </li>
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
@@ -447,6 +447,8 @@ window.Quarto = {
   <li><a href="#example-mcdonalds-stock-price" id="toc-example-mcdonalds-stock-price" class="nav-link" data-scroll-target="#example-mcdonalds-stock-price">Example: McDonald’s Stock Price</a></li>
   <li><a href="#partial-autocorrelation-plots-of-various-arp-processes" id="toc-partial-autocorrelation-plots-of-various-arp-processes" class="nav-link" data-scroll-target="#partial-autocorrelation-plots-of-various-arp-processes">Partial Autocorrelation Plots of Various <span class="math inline">\(AR(p)\)</span> Processes</a></li>
   <li><a href="#shiny-app" id="toc-shiny-app" class="nav-link" data-scroll-target="#shiny-app">Shiny App</a></li>
+  <li><a href="#google-sheets-test" id="toc-google-sheets-test" class="nav-link" data-scroll-target="#google-sheets-test">google sheets test</a></li>
+  <li><a href="#onedrive-excel" id="toc-onedrive-excel" class="nav-link" data-scroll-target="#onedrive-excel">Onedrive excel</a></li>
   </ul></li>
   <li><a href="#class-activity-stationary-and-non-stationary-ar-processes-15-min" id="toc-class-activity-stationary-and-non-stationary-ar-processes-15-min" class="nav-link" data-scroll-target="#class-activity-stationary-and-non-stationary-ar-processes-15-min">Class Activity: Stationary and Non-Stationary AR Processes (15 min)</a></li>
   <li><a href="#homework-preview-5-min" id="toc-homework-preview-5-min" class="nav-link" data-scroll-target="#homework-preview-5-min">Homework Preview (5 min)</a></li>
@@ -479,22 +481,24 @@ window.Quarto = {
 <script type="text/javascript">
  function showhide(id) {
     var e = document.getElementById(id);
-    e.style.display = (e.style.display == 'block') ? 'none' : 'block';
+    // Ensure the element is always shown
+    e.style.display = 'block';
  }
  
  function openTab(evt, tabName) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
+    var i, tablinks;
+    // Skip hiding tab content
+    var tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
+        tabcontent[i].style.display = "block"; // Keep everything visible
     }
     tablinks = document.getElementsByClassName("tablinks");
     for (i = 0; i < tablinks.length; i++) {
         tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
-    document.getElementById(tabName).style.display = "block";
+    document.getElementById(tabName).style.display = "block"; // Ensure selected tab content is shown
     evt.currentTarget.className += " active";
- }    
+ }
 </script>
 <section id="learning-outcomes" class="level2">
 <h2 class="anchored" data-anchor-id="learning-outcomes">Learning Outcomes</h2>
@@ -557,7 +561,7 @@ Definition of an Autoregressive (AR) Model
 </div>
 </div>
 <p>In short, this means that the next observation of a time series depends linearly on the previous <span class="math inline">\(p\)</span> terms and a random white noise component.</p>
-<!-- Check your Understanding -->
+<p>Check your Understanding</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled" title="Check Your Understanding">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -576,7 +580,7 @@ Check Your Understanding
 </div>
 </div>
 <p>We have seen some special cases of this model already.</p>
-<!-- Check your Understanding -->
+<p>Check your Understanding</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled" title="Check Your Understanding">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -595,7 +599,7 @@ Check Your Understanding
 </div>
 </div>
 <p>We now explore the autoregressive properties of this model.</p>
-<!-- Check your Understanding -->
+<p>Check your Understanding</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled" title="Check Your Understanding">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -709,7 +713,7 @@ Correlogram of an AR(1) Process
 \]</span> where <span class="math inline">\(|\alpha| &lt; 1\)</span>.</p>
 </div>
 </div>
-<!-- Check Your Understanding -->
+<p>Check Your Understanding</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled" title="Check Your Understanding">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -732,7 +736,7 @@ Check Your Understanding
 <section id="small-group-activity-simulation-of-an-ar1-process" class="level3">
 <h3 class="anchored" data-anchor-id="small-group-activity-simulation-of-an-ar1-process">Small Group Activity: Simulation of an <span class="math inline">\(AR(1)\)</span> Process</h3>
  <iframe id="AR1_app" src="https://posit.byui.edu/content/be8ec2cd-6209-4b53-a5c6-be11464b86de" style="border: none; width: 100%; height: 1100px" frameborder="0"></iframe>
-<!-- Check Your Understanding -->
+<p>Check Your Understanding</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled" title="Check Your Understanding">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -776,7 +780,7 @@ Partial Autocorrleation
 </div>
 </div>
 <p>For example, the partial correlation for lag 4 is the correlation not explained by lags 1, 2, or 3.</p>
-<!-- Check Your Understanding -->
+<p>Check Your Understanding</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled" title="Check Your Understanding">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -788,7 +792,7 @@ Check Your Understanding
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li>What is the value of the partial autocorrelation function for an <span class="math inline">\(AR(2)\)</span> process for all lags greater than 2? <!-- Zero --></li>
+<li>What is the value of the partial autocorrelation function for an <span class="math inline">\(AR(2)\)</span> process for all lags greater than 2? Zero</li>
 </ul>
 </div>
 </div>
@@ -805,7 +809,7 @@ ACF and PACF of an <span class="math inline">\(AR(p)\)</span> Process
 <div class="callout-body-container callout-body">
 <p>For an <span class="math inline">\(AR(p)\)</span> process, we observe the following:</p>
 <center>
-<table class="table">
+<table class="caption-top table">
 <thead>
 <tr class="header">
 <th></th>
@@ -824,11 +828,37 @@ ACF and PACF of an <span class="math inline">\(AR(p)\)</span> Process
 </tbody>
 </table>
 </center>
-<!-- https://people.cs.pitt.edu/~milos/courses/cs3750/lectures/class16.pdf -->
-<!-- |      | AR(p)                  | MA(q)                  | ARMA(p,q)                | -->
-<!-- |------|------------------------|------------------------|--------------------------| -->
-<!-- | ACF  | Tails off              | Cuts off after lag $q$ | Tails off                | -->
-<!-- | PACF | Cuts off after lag $p$ | Tails off              | Tails off                | -->
+<p>https://people.cs.pitt.edu/~milos/courses/cs3750/lectures/class16.pdf</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 30%">
+<col style="width: 30%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>AR(p)</th>
+<th>MA(q)</th>
+<th>ARMA(p,q)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ACF</td>
+<td>Tails off</td>
+<td>Cuts off after lag <span class="math inline">\(q\)</span></td>
+<td>Tails off</td>
+</tr>
+<tr class="even">
+<td>PACF</td>
+<td>Cuts off after lag <span class="math inline">\(p\)</span></td>
+<td>Tails off</td>
+<td>Tails off</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </section>
@@ -876,14 +906,14 @@ ACF and PACF of an <span class="math inline">\(AR(p)\)</span> Process
 <section id="shiny-app" class="level3">
 <h3 class="anchored" data-anchor-id="shiny-app">Shiny App</h3>
  <iframe id="FittedModels_app" src="https://posit.byui.edu/content/6c451298-48a0-43a4-b8e2-52d9adc6baeb" style="border: none; width: 100%; height: 1400px" frameborder="0"></iframe>
-<!-- ### google sheets test -->
-<!-- ```{=html} -->
-<!--  <iframe id="googlesheets" src="https://docs.google.com/spreadsheets/d/1K0yK3Ck08FBgPp8eDxw4aa7NhwDvuhTvb04U0ZjqB4A/edit?usp=sharing" style="border: none; width: 100%; height: 1100px" frameborder="0"></iframe> -->
-<!-- ``` -->
-<!-- ### Onedrive excel -->
-<!-- ```{=html} -->
-<!--  <iframe id="excel" src="https://1drv.ms/x/s!AmVxjPrpSKCjgv4ZsHYfXZJZ4ZasWw?e=jRJW5j" style="border: none; width: 100%; height: 1100px" frameborder="0"></iframe> -->
-<!-- ``` -->
+</section>
+<section id="google-sheets-test" class="level3">
+<h3 class="anchored" data-anchor-id="google-sheets-test">google sheets test</h3>
+ <iframe id="googlesheets" src="https://docs.google.com/spreadsheets/d/1K0yK3Ck08FBgPp8eDxw4aa7NhwDvuhTvb04U0ZjqB4A/edit?usp=sharing" style="border: none; width: 100%; height: 1100px" frameborder="0"></iframe> 
+</section>
+<section id="onedrive-excel" class="level3">
+<h3 class="anchored" data-anchor-id="onedrive-excel">Onedrive excel</h3>
+ <iframe id="excel" src="https://1drv.ms/x/s!AmVxjPrpSKCjgv4ZsHYfXZJZ4ZasWw?e=jRJW5j" style="border: none; width: 100%; height: 1100px" frameborder="0"></iframe> 
 </section>
 </section>
 <section id="class-activity-stationary-and-non-stationary-ar-processes-15-min" class="level2">
@@ -955,7 +985,7 @@ Definition of the Absolute Value in the Complex Plane
 </div>
 </div>
 <p>Practice computing the absolute value of a complex number. <span class="math inline">\(\ \)</span></p>
-<!-- Check Your Understanding -->
+<p>Check Your Understanding</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled" title="Check Your Understanding">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -978,7 +1008,7 @@ Check Your Understanding
 </div>
 </div>
 <p>We will now practice assessing whether an AR process is stationary using the characteristic equation.</p>
-<!-- Check Your Understanding -->
+<p>Check Your Understanding</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled" title="Check Your Understanding">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -998,28 +1028,31 @@ Check Your Understanding
 <ul>
 <li><p><span class="math inline">\(AR(1)\)</span> process: <span class="math display">\[
 x_t = x_{t-1} + w_t
-\]</span> <!-- $\mathbf{B} = 1$ --> <!-- Not stationary --></p></li>
+\]</span> <span class="math inline">\(\mathbf{B} = 1\)</span> Not stationary</p></li>
 <li><p><span class="math inline">\(AR(1)\)</span> process: <span class="math display">\[
 x_t = \frac{1}{3} x_{t-1} + w_t
-\]</span> <!-- $\mathbf{B} = 3$ --> <!-- Stationary --></p></li>
+\]</span> <span class="math inline">\(\mathbf{B} = 3\)</span> Stationary</p></li>
 <li><p><span class="math inline">\(AR(2)\)</span> process: <span class="math display">\[
 x_t = - \frac{1}{4} x_{t-1} + \frac{1}{8} x_{t-2} + w_t
-\]</span> <!-- $$ -\frac{1}{8} \left(\mathbf{B}^2 - 2 \mathbf{B} - 8 \right) x_t = w_t $$ --> <!-- B = -4, B = 2 --> <!-- Stationary --></p></li>
+\]</span> <span class="math display">\[ -\frac{1}{8} \left(\mathbf{B}^2 - 2 \mathbf{B} - 8 \right) x_t = w_t \]</span> B = -4, B = 2 Stationary</p></li>
 <li><p><span class="math inline">\(AR(2)\)</span> process: <span class="math display">\[
 x_t = - \frac{2}{3} x_{t-1} + \frac{1}{3} x_{t-2} + w_t
-\]</span> <!-- $$ -\frac{1}{3} \left(\mathbf{B}^2 - 2 \mathbf{B} - 3 \right) x_t = w_t $$ --> <!-- B = -1, B = 3 --> <!-- Non-Stationary --></p></li>
+\]</span> <span class="math display">\[ -\frac{1}{3} \left(\mathbf{B}^2 - 2 \mathbf{B} - 3 \right) x_t = w_t \]</span> B = -1, B = 3 Non-Stationary</p></li>
 <li><p><span class="math inline">\(AR(2)\)</span> process: <span class="math display">\[
 x_t = -x_{t-1} - 2 x_{t-2} + w_t
-\]</span> <!-- $$ \left(\mathbf{B}^2 + 1/2 * \mathbf{B} + 1/2 \right) x_t = w_t $$ --> <!-- B = 1/4 +/- \frac{sqrt{7}}{4} i --> <!-- Non-Stationary --></p></li>
+\]</span> <span class="math display">\[ \left(\mathbf{B}^2 + 1/2 * \mathbf{B} + 1/2 \right) x_t = w_t \]</span> B = 1/4 +/- i Non-Stationary</p></li>
 <li><p><span class="math inline">\(AR(2)\)</span> process: <span class="math display">\[
 x_t = \frac{3}{2} x_{t-1} - x_{t-2} + w_t
-\]</span> <!-- $$ \left(\mathbf{B}^2 - \frac{3}{2} \mathbf{B} + 1 \right) x_t = w_t $$ --> <!-- B = \frac{3}{4} +/- \frac{sqrt{7}}{4} i  --> <!-- |B| = 1 --> <!-- Non-Stationary --></p></li>
+\]</span> <span class="math display">\[ \left(\mathbf{B}^2 - \frac{3}{2} \mathbf{B} + 1 \right) x_t = w_t \]</span> B = +/- i<br>
+|B| = 1 Non-Stationary</p></li>
 <li><p><span class="math inline">\(AR(2)\)</span> process: <span class="math display">\[
 x_t = 4 x_{t-2} + w_t
-\]</span> <!-- $$ \left(1 - 4\mathbf{B}^2 \right) x_t = w_t $$ --> <!-- B = \pm \frac{1}{2}  --> <!-- |B| = \frac{1}{2} --> <!-- Non-stationary --></p></li>
+\]</span> <span class="math display">\[ \left(1 - 4\mathbf{B}^2 \right) x_t = w_t \]</span> B = <br>
+|B| = Non-stationary</p></li>
 <li><p><span class="math inline">\(AR(3)\)</span> process: <span class="math display">\[
 x_t = \frac{2}{3} x_{t-1} + \frac{1}{4} x_{t-2} - \frac{1}{6} x_{t-3} + w_t
-\]</span> <!-- B = 2, -2, 3/2  --> <!-- Stationary --></p></li>
+\]</span> B = 2, -2, 3/2<br>
+Stationary</p></li>
 </ul>
 <ol start="4" type="1">
 <li>Choose one stationary <span class="math inline">\(AR(2)\)</span> process and one non-stationary <span class="math inline">\(AR(2)\)</span> process. For each, do the following:</li>
@@ -1093,7 +1126,7 @@ Download Homework
 </div>
 <p><a href="javascript:showhide('Solutions1')" style="font-size:.8em;">Autoregressive Model Definition</a></p>
 <div id="Solutions1" style="display:none;">
-<!-- Check your Understanding -->
+<p>Check your Understanding</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled" title="Check Your Understanding Solutions">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1239,8 +1272,7 @@ Check Your Understanding Solutions
 x_t = x_{t-1} + w_t
 \]</span></li>
 </ul>
-<!-- $\mathbf{B} = 1$ -->
-<!-- Not stationary -->
+<p><span class="math inline">\(\mathbf{B} = 1\)</span> Not stationary</p>
 <p><strong>Solution:</strong></p>
 <hr>
 
@@ -1492,18 +1524,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1535,7 +1556,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -1543,7 +1584,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -1640,7 +1681,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

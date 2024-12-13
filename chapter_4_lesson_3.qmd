@@ -15,22 +15,24 @@ source("common_functions.R")
 <script type="text/javascript">
  function showhide(id) {
     var e = document.getElementById(id);
-    e.style.display = (e.style.display == 'block') ? 'none' : 'block';
+    // Ensure the element is always shown
+    e.style.display = 'block';
  }
  
  function openTab(evt, tabName) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
+    var i, tablinks;
+    // Skip hiding tab content
+    var tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
+        tabcontent[i].style.display = "block"; // Keep everything visible
     }
     tablinks = document.getElementsByClassName("tablinks");
     for (i = 0; i < tablinks.length; i++) {
         tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
-    document.getElementById(tabName).style.display = "block";
+    document.getElementById(tabName).style.display = "block"; // Ensure selected tab content is shown
     evt.currentTarget.className += " active";
- }    
+ }
 </script>
 ```
 
@@ -78,7 +80,7 @@ where $\{w_t\}$ is white noise and the $\alpha_i$ are the model parameters with 
 
 In short, this means that the next observation of a time series depends linearly on the previous $p$ terms and a random white noise component. 
 
-<!-- Check your Understanding -->
+Check your Understanding 
 
 ::: {.callout-tip icon=false title="Check Your Understanding"}
 
@@ -91,7 +93,7 @@ $$
 
 We have seen some special cases of this model already.
 
-<!-- Check your Understanding -->
+Check your Understanding 
 
 ::: {.callout-tip icon=false title="Check Your Understanding"}
 
@@ -107,7 +109,7 @@ $$\alpha_i = \alpha(1-\alpha)^i$$
 
 We now explore the autoregressive properties of this model.
 
-<!-- Check your Understanding -->
+Check your Understanding 
 
 ::: {.callout-tip icon=false title="Check Your Understanding"}
 
@@ -216,7 +218,7 @@ where $|\alpha| < 1$.
 :::
 
 
-<!-- Check Your Understanding -->
+Check Your Understanding 
 
 ::: {.callout-tip icon=false title="Check Your Understanding"}
 
@@ -237,7 +239,7 @@ for $k \ge 0$ when $|\alpha|<1$.
 ```
 
 
-<!-- Check Your Understanding -->
+Check Your Understanding 
 
 ::: {.callout-tip icon=false title="Check Your Understanding"}
 
@@ -267,12 +269,12 @@ The **partial autocorrelation** at lag $k$ is defined as the portion of the corr
 For example, the partial correlation for lag 4 is the correlation not explained by lags 1, 2, or 3.
 
 
-<!-- Check Your Understanding -->
+Check Your Understanding 
 
 ::: {.callout-tip icon=false title="Check Your Understanding"}
 
 -   What is the value of the partial autocorrelation function for an $AR(2)$ process for all lags greater than 2?
-<!-- Zero -->
+Zero 
 
 :::
 
@@ -292,12 +294,12 @@ For an $AR(p)$ process, we observe the following:
 
 </center>
 
-<!-- https://people.cs.pitt.edu/~milos/courses/cs3750/lectures/class16.pdf -->
+https://people.cs.pitt.edu/~milos/courses/cs3750/lectures/class16.pdf 
 
-<!-- |      | AR(p)                  | MA(q)                  | ARMA(p,q)                | -->
-<!-- |------|------------------------|------------------------|--------------------------| -->
-<!-- | ACF  | Tails off              | Cuts off after lag $q$ | Tails off                | -->
-<!-- | PACF | Cuts off after lag $p$ | Tails off              | Tails off                | -->
+|      | AR(p)                  | MA(q)                  | ARMA(p,q)                | 
+|------|------------------------|------------------------|--------------------------| 
+| ACF  | Tails off              | Cuts off after lag $q$ | Tails off                | 
+| PACF | Cuts off after lag $p$ | Tails off              | Tails off                | 
 
 :::
 
@@ -342,21 +344,13 @@ Here are some time plots, correlograms, and partial correlograms for $AR(p)$ pro
 
 ### Shiny App
 
-```{=html}
- <iframe id="FittedModels_app" src="https://posit.byui.edu/content/6c451298-48a0-43a4-b8e2-52d9adc6baeb" style="border: none; width: 100%; height: 1400px" frameborder="0"></iframe>
-```
+not working
 
-<!-- ### google sheets test -->
+### google sheets test 
 
-<!-- ```{=html} -->
-<!--  <iframe id="googlesheets" src="https://docs.google.com/spreadsheets/d/1K0yK3Ck08FBgPp8eDxw4aa7NhwDvuhTvb04U0ZjqB4A/edit?usp=sharing" style="border: none; width: 100%; height: 1100px" frameborder="0"></iframe> -->
-<!-- ``` -->
-
-<!-- ### Onedrive excel -->
-<!-- ```{=html} -->
-<!--  <iframe id="excel" src="https://1drv.ms/x/s!AmVxjPrpSKCjgv4ZsHYfXZJZ4ZasWw?e=jRJW5j" style="border: none; width: 100%; height: 1100px" frameborder="0"></iframe> -->
-<!-- ``` -->
-
+```{=html} 
+ <iframe id="googlesheets" src="https://docs.google.com/spreadsheets/d/1K0yK3Ck08FBgPp8eDxw4aa7NhwDvuhTvb04U0ZjqB4A/edit?usp=sharing" style="border: none; width: 100%; height: 1100px" frameborder="0"></iframe> 
+``` 
 
 
 
@@ -425,7 +419,7 @@ $$
 Practice computing the absolute value of a complex number. $\ $
 
 
-<!-- Check Your Understanding -->
+Check Your Understanding 
 
 ::: {.callout-tip icon=false title="Check Your Understanding"}
 
@@ -447,7 +441,7 @@ Find the absolute value of the following (complex) numbers:
 
 We will now practice assessing whether an AR process is stationary using the characteristic equation. 
 
-<!-- Check Your Understanding -->
+Check Your Understanding 
 
 ::: {.callout-tip icon=false title="Check Your Understanding"}
 
@@ -461,69 +455,69 @@ For each of the following AR processes, do the following:
 $$
     x_t = x_{t-1} + w_t
 $$
-<!-- $\mathbf{B} = 1$ -->
-<!-- Not stationary -->
+$\mathbf{B} = 1$ 
+Not stationary 
 
 -   $AR(1)$ process:
 $$
     x_t = \frac{1}{3} x_{t-1} + w_t
 $$
-<!-- $\mathbf{B} = 3$ -->
-<!-- Stationary -->
+$\mathbf{B} = 3$ 
+Stationary 
 
 -   $AR(2)$ process:
 $$
     x_t = - \frac{1}{4} x_{t-1} + \frac{1}{8} x_{t-2} + w_t
 $$
-<!-- $$ -\frac{1}{8} \left(\mathbf{B}^2 - 2 \mathbf{B} - 8 \right) x_t = w_t $$ -->
-<!-- B = -4, B = 2 -->
-<!-- Stationary -->
+$$ -\frac{1}{8} \left(\mathbf{B}^2 - 2 \mathbf{B} - 8 \right) x_t = w_t $$ 
+B = -4, B = 2 
+Stationary 
 
 
 -   $AR(2)$ process:
 $$
     x_t = - \frac{2}{3} x_{t-1} + \frac{1}{3} x_{t-2} + w_t
 $$
-<!-- $$ -\frac{1}{3} \left(\mathbf{B}^2 - 2 \mathbf{B} - 3 \right) x_t = w_t $$ -->
-<!-- B = -1, B = 3 -->
-<!-- Non-Stationary -->
+$$ -\frac{1}{3} \left(\mathbf{B}^2 - 2 \mathbf{B} - 3 \right) x_t = w_t $$ 
+B = -1, B = 3 
+Non-Stationary 
 
 
 -   $AR(2)$ process:
 $$
     x_t = -x_{t-1} - 2 x_{t-2} + w_t
 $$
-<!-- $$ \left(\mathbf{B}^2 + 1/2 * \mathbf{B} + 1/2 \right) x_t = w_t $$ -->
-<!-- B = 1/4 +/- \frac{sqrt{7}}{4} i -->
-<!-- Non-Stationary -->
+$$ \left(\mathbf{B}^2 + 1/2 * \mathbf{B} + 1/2 \right) x_t = w_t $$ 
+B = 1/4 +/- \frac{sqrt{7}}{4} i 
+Non-Stationary 
 
 
 -   $AR(2)$ process:
 $$
     x_t = \frac{3}{2} x_{t-1} - x_{t-2} + w_t
 $$
-<!-- $$ \left(\mathbf{B}^2 - \frac{3}{2} \mathbf{B} + 1 \right) x_t = w_t $$ -->
-<!-- B = \frac{3}{4} +/- \frac{sqrt{7}}{4} i  -->
-<!-- |B| = 1 -->
-<!-- Non-Stationary -->
+$$ \left(\mathbf{B}^2 - \frac{3}{2} \mathbf{B} + 1 \right) x_t = w_t $$ 
+B = \frac{3}{4} +/- \frac{sqrt{7}}{4} i  
+|B| = 1 
+Non-Stationary 
 
 
 -   $AR(2)$ process:
 $$
     x_t = 4 x_{t-2} + w_t
 $$
-<!-- $$ \left(1 - 4\mathbf{B}^2 \right) x_t = w_t $$ -->
-<!-- B = \pm \frac{1}{2}  -->
-<!-- |B| = \frac{1}{2} -->
-<!-- Non-stationary -->
+$$ \left(1 - 4\mathbf{B}^2 \right) x_t = w_t $$ 
+B = \pm \frac{1}{2}  
+|B| = \frac{1}{2} 
+Non-stationary 
 
 
 -   $AR(3)$ process:
 $$
     x_t = \frac{2}{3} x_{t-1} + \frac{1}{4} x_{t-2} - \frac{1}{6} x_{t-3} + w_t
 $$
-<!-- B = 2, -2, 3/2  -->
-<!-- Stationary -->
+B = 2, -2, 3/2  
+Stationary 
 
 4.    Choose one stationary $AR(2)$ process and one non-stationary $AR(2)$ process. For each, do the following:
 
@@ -625,7 +619,7 @@ style="font-size:.8em;">Autoregressive Model Definition</a>
   
 ::: {#Solutions1 style="display:none;"}
 
-<!-- Check your Understanding -->
+Check your Understanding 
 
 ::: {.callout-tip icon=false title="Check Your Understanding Solutions"}
 
@@ -795,8 +789,8 @@ $$
     x_t = x_{t-1} + w_t
 $$
   
-<!-- $\mathbf{B} = 1$ -->
-<!-- Not stationary -->
+$\mathbf{B} = 1$ 
+Not stationary 
 
 **Solution:**
 
