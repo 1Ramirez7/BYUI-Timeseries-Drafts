@@ -1,36 +1,29 @@
 ---
 title: "White Noise and Random Walks - Part 2"
 subtitle: "Chapter 4: Lesson 2"
-format: html
+format: 
+  html:
+    toc: false
 editor: source
 sidebar: false
 ---
 
 ```{r}
-#| include: false
+
 source("common_functions.R")
 ```
 
 ```{=html}
 <script type="text/javascript">
  function showhide(id) {
-    var e = document.getElementById(id);
-    e.style.display = (e.style.display == 'block') ? 'none' : 'block';
+    // Do nothing
+    return;
  }
  
  function openTab(evt, tabName) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    document.getElementById(tabName).style.display = "block";
-    evt.currentTarget.className += " active";
- }    
+    // Do nothing
+    return;
+ }
 </script>
 ```
 
@@ -63,7 +56,7 @@ source("common_functions.R")
 ## Class Activity: Differencing a Time Series (15 min)
 
 ```{r, results='asis'}
-#| echo: false
+
 
 set.seed(6)
 n <- 8
@@ -130,7 +123,7 @@ stock_ts <- stock_df %>%
 ```
 
 ```{r}
-#| echo: false
+
 
 # Store data in a static file for future use
 stock_df |> rio::export("data/stock_price_mcd.parquet")
@@ -140,9 +133,8 @@ The time plot in @fig-example-stock-price-plot presents the closing price of `r 
 @fig-example-stock-difference-plot gives the differences in the closing prices of the stock as a time series.
 
 
-<!-- Beginning of two columns -->
-::: columns
-::: {.column width="45%"}
+ Beginning of two columns 
+
 
 
 ```{r}
@@ -160,13 +152,9 @@ plot_ly(stock_ts, x = ~dates, y = ~value, type = 'scatter', mode = 'lines') %>%
   )
 ```
 
-:::
 
-::: {.column width="10%"}
-<!-- empty column to create gap -->
-:::
+ empty column to create gap 
 
-::: {.column width="45%"}
 
 ```{r}
 #| code-fold: true
@@ -185,16 +173,14 @@ plot_ly(stock_ts, x = ~dates, y = ~diff, type = 'scatter', mode = 'lines') %>%
 
 ```
 
-:::
-:::
-<!-- End of two columns -->
+
+ End of two columns 
 
 @fig-example-stock-correlogram is the correlogram for the original `r company` stock price time series.
 @fig-example-diff-correlogram gives the correlogram for the differences in successive closing stock prices.
 
-<!-- Beginning of two columns -->
-::: columns
-::: {.column width="45%"}
+ Beginning of two columns 
+
 
 ```{r}
 #| code-fold: true
@@ -207,13 +193,8 @@ acf(stock_ts$value, plot=TRUE, type = "correlation", lag.max = 25)
 ```
 
 
-:::
 
-::: {.column width="10%"}
-<!-- empty column to create gap -->
-:::
-
-::: {.column width="45%"}
+ empty column to create gap 
 
 
 ```{r}
@@ -226,26 +207,19 @@ acf(stock_ts$value, plot=TRUE, type = "correlation", lag.max = 25)
 acf(stock_ts$diff |> na.omit(), plot=TRUE, type = "correlation", lag.max = 25)
 ```
 
-:::
-:::
-<!-- End of two columns -->
+ End of two columns 
 
 @fig-example-stock-difference-histogram is a histogram of the differences.
 On the right, we give the variance of the differences in the stock prices. This is a simple measure of the volatility of the stock, or in other words, how much the price changes in a day.
 
-<!-- Beginning of two columns -->
-::: columns
-::: {.column width="45%"}
+ Beginning of two columns 
 
-<!-- Nothing in column 1 -->
 
-:::
+ Nothing in column 1 
 
-::: {.column width="10%"}
-<!-- empty column to create gap -->
-:::
 
-::: {.column width="45%"}
+ empty column to create gap 
+
 
 ```{r}
 #| code-fold: true
@@ -277,9 +251,8 @@ stock_ts |>
 
 The variance of the differences is `r var(stock_ts$diff, na.rm = TRUE)|> round(3)`.
 
-:::
-:::
-<!-- End of two columns -->
+
+ End of two columns 
 
 
 
@@ -291,7 +264,6 @@ Notice that the values in the correlogram of the stock prices start at 1 and slo
 
 <a id="#DifferenceOperator">Differencing</a> nonstationary time series often leads to a stationary series, so we will define a formal operator to express this process.
 
-::: {.callout-note icon=false title="Definition of the Difference Operator"}
 
 The **difference operator**, $\nabla$, is defined as:
 
@@ -301,13 +273,12 @@ Higher-order differencing can be denoted
 
 $$\nabla^n x_t = (1-\mathbf{B})^n x_t$$
 
-:::
 
 To see what this expression gives us, note that $\nabla$ gives a new time series that is comprised of the differences between successive terms of the original time series. The operator $\nabla^2$ generates a time series that is comprised of the differences between successive terms of the *differenced* time series. It is the difference of the differences, or the second difference.
 
-<!-- Check Your Understanding -->
+ Check Your Understanding 
 
-::: {.callout-tip icon=false title="Check Your Understanding"}
+
 
 <a href="https://github.com/TBrost/BYUI-Timeseries-Drafts/raw/master/handouts/chapter_4_2_handout.xlsx" download="chapter_4_2_handout.xlsx"> Tables-Handout-Excel </a>
 
@@ -315,16 +286,15 @@ Consider the following time series, where $n=`r n`$:
 
 <center>
 ```{r, results='asis'}
-#| echo: false
+
 
 cat( paste( paste0("$x_{", d_operator$t, "} = ", d_operator$x, "$"), collapse = ",$~$ " ) ) 
 ```
 </center>
 
 
-<!-- Beginning of two columns -->
-::: columns
-::: {.column width="45%"}
+ Beginning of two columns 
+
 
 -   Find the first differences, $\nabla x_t$
 -   Find the second differences, $\nabla^2 x_t$.
@@ -337,16 +307,12 @@ cat( paste( paste0("$x_{", d_operator$t, "} = ", d_operator$x, "$"), collapse = 
 \end{align*}
 and check that this is equal to the last term in the sequence of second differences.
 
-:::
 
-::: {.column width="10%"}
-<!-- empty column to create gap -->
-:::
+ empty column to create gap 
 
-::: {.column width="45%"}
 
 ```{r}
-#| echo: false
+
 
 d_operator |>
   dplyr::select(-diff) |>
@@ -358,17 +324,14 @@ d_operator |>
     "$$\\nabla x_t$$" = diff1,
     "$$\\nabla^2 x_t$$" = diff2
   ) |>
-  replace_na_with_char("") |>
-  replace_cells_with_char(rows = 1:8, cols = 3:4) |>
   display_table("0.5in")
 ```
 
-:::
-:::
-<!-- End of two columns -->
 
-:::
-<!-- End of Check your understanding -->
+ End of two columns 
+
+
+ End of Check your understanding 
 
 
 ### Small-Group Activity: Computing Differences
@@ -383,12 +346,11 @@ Compute the differences specified below.
 
 #### Linear 
 
-<!-- Beginning of two columns -->
-::: columns
-::: {.column width="45%"}
+ Beginning of two columns 
+ columns
 
 ```{r}
-#| echo: false
+
 #| fig-asp: 1
 #| fig-width: 4
 
@@ -419,16 +381,15 @@ df_linear |>
   )
 ```
 
-:::
 
-::: {.column width="10%"}
-<!-- empty column to create gap -->
-:::
 
-::: {.column width="45%"}
+
+ empty column to create gap 
+
+
 
 ```{r}
-#| echo: false
+
 
 df_linear |>
   rename(
@@ -438,14 +399,12 @@ df_linear |>
     " " = diff2, 
     "  " = diff3
   ) |>
-  replace_na_with_char("") |>
-  replace_cells_with_char(rows = 1:9, cols = 3:5, new_char = "") |>
   display_table("0.5in")
 ```
 
-:::
-:::
-<!-- End of two columns -->
+
+
+ End of two columns 
 
 
 
@@ -454,12 +413,12 @@ df_linear |>
 #### Quadratic 
 
 
-<!-- Beginning of two columns -->
-::: columns
-::: {.column width="45%"}
+ Beginning of two columns 
+ columns
+
 
 ```{r}
-#| echo: false
+
 #| fig-asp: 1
 #| fig-width: 4
 
@@ -490,16 +449,14 @@ df_quadratic |>
   )
 ```
 
-:::
 
-::: {.column width="10%"}
-<!-- empty column to create gap -->
-:::
 
-::: {.column width="45%"}
+ empty column to create gap 
+
+
 
 ```{r}
-#| echo: false
+
 
 df_quadratic |>
   rename(
@@ -509,26 +466,24 @@ df_quadratic |>
     "$$\\nabla^2 x_t$$" = diff2,
     "  " = diff3
   ) |>
-  replace_na_with_char("") |>
-  replace_cells_with_char(rows = 1:9, cols = 3:5, new_char = "") |>
   display_table("0.5in")
 ```
 
-:::
-:::
-<!-- End of two columns -->
+
+
+ End of two columns 
 
 
 
 #### Cubic 
 
 
-<!-- Beginning of two columns -->
-::: columns
-::: {.column width="45%"}
+ Beginning of two columns 
+ columns
+
 
 ```{r}
-#| echo: false
+
 #| fig-asp: 1
 #| fig-width: 4
 
@@ -558,16 +513,15 @@ df_cubic |>
   )
 ```
 
-:::
 
-::: {.column width="10%"}
-<!-- empty column to create gap -->
-:::
 
-::: {.column width="45%"}
+ empty column to create gap 
+
+
+
 
 ```{r}
-#| echo: false
+
 
 df_cubic |>
   rename(
@@ -577,14 +531,12 @@ df_cubic |>
     "$$\\nabla^2 x_t$$" = diff2,
     "$$\\nabla^3 x_t$$" = diff3
   ) |>
-  replace_na_with_char("") |>
-  replace_cells_with_char(rows = 1:9, cols = 3:5, new_char = "") |>
   display_table("0.5in")
 ```
 
-:::
-:::
-<!-- End of two columns -->
+
+
+ End of two columns 
 
 
 
@@ -593,9 +545,8 @@ df_cubic |>
 
 In this activity, you will apply what you have learned to a new stock.
 
-<!-- Check Your Understanding -->
+ Check Your Understanding 
 
-::: {.callout-tip icon=false title="Check Your Understanding"}
 
 Modify the code used to get the prices of `r company` stock</a> to download closing stock prices for a different publicly-traded company over a time period of your choice. 
 
@@ -680,22 +631,22 @@ Do the following.
 -   Compute the variance of the differences
 -   Compare your results with those from the other teams of students.
 
-:::
 
 
 
-<!-- This should be a stock where the ACF of the first differences is significant for k=1, but not for k>1. -->
-<!-- This should be a stock where the ACF of the first differences is significant for k=1, but not for k>1. -->
-<!-- This should be a stock where the ACF of the first differences is significant for k=1, but not for k>1. -->
-<!-- ~~~ -->
-<!--                                     This is very hard to find                                          -->
-<!-- ~~~ -->
-<!-- The correlogram for the residuals from the Holt-Winters model match the correlogram for the differences. Why?  -->
-<!-- The correlogram for the residuals from the Holt-Winters model match the correlogram for the differences. Why?  -->
-<!-- The correlogram for the residuals from the Holt-Winters model match the correlogram for the differences. Why?  -->
-<!-- It's like there is no improvement in the fit of the model after doing Holt-Winters. -->
-<!-- It's like there is no improvement in the fit of the model after doing Holt-Winters. -->
-<!-- It's like there is no improvement in the fit of the model after doing Holt-Winters. -->
+
+ This should be a stock where the ACF of the first differences is significant for k=1, but not for k>1. 
+ This should be a stock where the ACF of the first differences is significant for k=1, but not for k>1. 
+ This should be a stock where the ACF of the first differences is significant for k=1, but not for k>1. 
+ ~~~ 
+                                     This is very hard to find                                          
+ ~~~ 
+ The correlogram for the residuals from the Holt-Winters model match the correlogram for the differences. Why?  
+ The correlogram for the residuals from the Holt-Winters model match the correlogram for the differences. Why?  
+ The correlogram for the residuals from the Holt-Winters model match the correlogram for the differences. Why?  
+ It's like there is no improvement in the fit of the model after doing Holt-Winters. 
+ It's like there is no improvement in the fit of the model after doing Holt-Winters. 
+ It's like there is no improvement in the fit of the model after doing Holt-Winters. 
 
 
 ## Optional Activity: Integrated Autoregressive Model (10 min)
@@ -704,7 +655,6 @@ Do the following.
 <a href="javascript:showhide('IntegratedAutoregressiveModel')"
 style="font-size:.8em;">Click here for further information about Section 4.4.2 in the book</a>
 
-::: {#IntegratedAutoregressiveModel style="display:none;"}
 
 This is a time plot of the quarterly exchange rate (UK Pounds to NZ Dollars, 1991-2000). This is the data set given in the textbook.
 
@@ -785,7 +735,7 @@ z_model |>
 ```
 
 ```{r}
-#| include: false
+
 
 beta_value <- z_model |>
   coef() |>
@@ -809,9 +759,8 @@ $$
 $$
 
 
-<!-- Check Your Understanding -->
+ Check Your Understanding 
 
-::: {.callout-tip icon=false title="Check Your Understanding"}
 
 Start with the fitted system of equations
 $$
@@ -830,7 +779,7 @@ by completing the following steps.
 -   Solve for the term $\mathbf{B} b_t$ in the first equation and substitute the resulting expression into the second equation.
 -   Combine like terms and simplify.
 
-:::
+
 
 We will examine the residuals from the Holt-Winters model:
 
@@ -855,28 +804,28 @@ ACF(z_hw, .resid) |>
 Notice that there are no significant autocorrelations, so we conclude that the Holt-Winters model yields reasonable estimates of the time series.
 
 
-::: 
-<!-- End of Integrated Autoregressive Model -->
-<!-- End of Integrated Autoregressive Model -->
-<!-- End of Integrated Autoregressive Model -->
-<!-- End of Integrated Autoregressive Model -->
-<!-- End of Integrated Autoregressive Model -->
-<!-- End of Integrated Autoregressive Model -->
-<!-- End of Integrated Autoregressive Model -->
-<!-- End of Integrated Autoregressive Model -->
-<!-- End of Integrated Autoregressive Model -->
+
+ End of Integrated Autoregressive Model 
+ End of Integrated Autoregressive Model 
+ End of Integrated Autoregressive Model 
+ End of Integrated Autoregressive Model 
+ End of Integrated Autoregressive Model 
+ End of Integrated Autoregressive Model 
+ End of Integrated Autoregressive Model 
+ End of Integrated Autoregressive Model 
+ End of Integrated Autoregressive Model 
 
 
 
 
 ## Class Activity: Random Walk with Drift (15 min)
 
-<!-- This should be a stock with a fairly linear trend over time. -->
-<!-- This should be a stock with a fairly linear trend over time. -->
-<!-- This should be a stock with a fairly linear trend over time. -->
-<!-- This should be a stock with a fairly linear trend over time. -->
-<!-- This should be a stock with a fairly linear trend over time. -->
-<!-- This should be a stock with a fairly linear trend over time. -->
+ This should be a stock with a fairly linear trend over time. 
+ This should be a stock with a fairly linear trend over time. 
+ This should be a stock with a fairly linear trend over time. 
+ This should be a stock with a fairly linear trend over time. 
+ This should be a stock with a fairly linear trend over time. 
+ This should be a stock with a fairly linear trend over time. 
 
 We will now consider the daily closing price of Abercrombie & Fitch stock (Symbol = ANF). Here is a time series plot of the closing stock prices.
 
@@ -994,9 +943,8 @@ This confidence interval does not contain 0, so we conclude that there is eviden
 
 
 
-<!-- Check Your Understanding -->
+ Check Your Understanding 
 
-::: {.callout-tip icon=false title="Check Your Understanding"}
 
 Use the McDonald's stock price data to do the following.
 
@@ -1005,7 +953,7 @@ Use the McDonald's stock price data to do the following.
 -   What is the 95% confidence interval for the drift parameter?
 -   Is there evidence to suggest that the time series can be modeled as a random walk with drift? Why or why not?
 
-:::
+
 
 
 
@@ -1018,26 +966,22 @@ Use the McDonald's stock price data to do the following.
 -   Clarify questions
 
 
-::: {.callout-note icon=false icon=false}
+ {.callout-note icon=false icon=false}
 
 ## Download Homework
 
 <a href="https://byuistats.github.io/timeseries/homework/homework_4_2.qmd" download="homework_4_2.qmd"> homework_4_2.qmd </a>
 
-:::
+
 
 
 <a href="https://github.com/TBrost/BYUI-Timeseries-Drafts/raw/master/handouts/chapter_4_2_handout_key.xlsx" download="chapter_4_2_handout_key.xlsx"> Tables-Handout-Excel-key </a>
 
 
-<a href="javascript:showhide('Solutions3')"
-style="font-size:.8em;">Difference Operator</a>
-  
-::: {#Solutions3 style="display:none;"}
 
 <center>
 ```{r, results='asis'}
-#| echo: false
+
 
 cat( paste( paste0("$x_{", d_operator$t, "} = ", d_operator$x, "$"), collapse = ",$~$ " ) ) 
 ```
@@ -1045,9 +989,7 @@ cat( paste( paste0("$x_{", d_operator$t, "} = ", d_operator$x, "$"), collapse = 
 
 Check Your Understanding Solutions:
 
-<!-- Beginning of two columns -->
-::: columns
-::: {.column width="45%"}
+ Beginning of two columns 
 
 -   The values of the first differences are:
 $$
@@ -1107,16 +1049,11 @@ $$
 This is the value of the last term in the sequence of second differences.
 
 
-:::
+ empty column to create gap 
 
-::: {.column width="10%"}
-<!-- empty column to create gap -->
-:::
-
-::: {.column width="45%"}
 
 ```{r}
-#| echo: false
+
 
 d_operator |>
   dplyr::select(-diff) |>
@@ -1128,39 +1065,29 @@ d_operator |>
     "$$\\nabla x_t$$" = diff1,
     "$$\\nabla^2 x_t$$" = diff2
   ) |>
-  replace_na_with_char("") |>
-  # replace_cells_with_char(rows = 1:8, cols = 3:4) |>
   display_table("0.5in")
 ```
 
 
-:::
-:::
-<!-- End of two columns -->
+ End of two columns 
 
 
 
-:::
-<!-- End of solution -->
+ End of solution 
 
 
 
 
-<!-- Solutions at the bottom of the page -->
+ Solutions at the bottom of the page 
 
-<a href="javascript:showhide('Solutions5')"
-style="font-size:.8em;">Computing Differences</a>
-
-::: {#Solutions5 style="display:none;"}
 
 #### Linear 
 
-<!-- Beginning of two columns -->
-::: columns
-::: {.column width="45%"}
+ Beginning of two columns 
+
 
 ```{r}
-#| echo: false
+
 #| fig-asp: 1
 #| fig-width: 4
 
@@ -1191,33 +1118,26 @@ df_linear |>
   )
 ```
 
-:::
+ empty column to create gap 
 
-::: {.column width="10%"}
-<!-- empty column to create gap -->
-:::
-
-::: {.column width="45%"}
 
 ```{r}
-#| echo: false
+
 
 df_linear |>
   rename(
     "$$t$$" = t,
     "$$x_t$$" = x,
     "$$\\nabla x_t$$" = diff1,
-    " " = diff2, 
-    "  " = diff3
+    "$$\\nabla^2 x_t$$" = diff2,
+    "$$\\nabla^3 x_t$$" = diff3
   ) |>
-  replace_na_with_char("") |>
-  replace_cells_with_char(rows = 1:9, cols = 4:5, new_char = "") |>
   display_table("0.5in")
+
 ```
 
-:::
-:::
-<!-- End of two columns -->
+
+ End of two columns 
 
 
 
@@ -1226,12 +1146,11 @@ df_linear |>
 #### Quadratic
 
 
-<!-- Beginning of two columns -->
-::: columns
-::: {.column width="45%"}
+ Beginning of two columns 
+
 
 ```{r}
-#| echo: false
+
 #| fig-asp: 1
 #| fig-width: 4
 
@@ -1262,16 +1181,10 @@ df_quadratic |>
   )
 ```
 
-:::
-
-::: {.column width="10%"}
-<!-- empty column to create gap -->
-:::
-
-::: {.column width="45%"}
+ empty column to create gap 
 
 ```{r}
-#| echo: false
+
 
 df_quadratic |>
   rename(
@@ -1281,26 +1194,22 @@ df_quadratic |>
     "$$\\nabla^2 x_t$$" = diff2,
     "  " = diff3
   ) |>
-  replace_na_with_char("") |>
-  replace_cells_with_char(rows = 1:9, cols = 5, new_char = "") |>
   display_table("0.5in")
 ```
 
-:::
-:::
-<!-- End of two columns -->
+
+ End of two columns 
 
 
 
 #### Cubic
 
 
-<!-- Beginning of two columns -->
-::: columns
-::: {.column width="45%"}
+ Beginning of two columns 
+
 
 ```{r}
-#| echo: false
+
 #| fig-asp: 1
 #| fig-width: 4
 
@@ -1330,16 +1239,12 @@ df_cubic |>
   )
 ```
 
-:::
 
-::: {.column width="10%"}
-<!-- empty column to create gap -->
-:::
+ empty column to create gap 
 
-::: {.column width="45%"}
 
 ```{r}
-#| echo: false
+
 
 df_cubic |>
   rename(
@@ -1349,17 +1254,13 @@ df_cubic |>
     "$$\\nabla^2 x_t$$" = diff2,
     "$$\\nabla^3 x_t$$" = diff3
   ) |>
-  replace_na_with_char("") |>
-  # replace_cells_with_char(rows = 1:9, cols = 3:5, new_char = "") |>
   display_table("0.5in")
 ```
 
-:::
-:::
-<!-- End of two columns -->
 
-:::
-<!-- End of Solution -->
+ End of two columns 
+
+ End of Solution 
 
 
 
@@ -1367,16 +1268,12 @@ df_cubic |>
 
 
 
-<!-- Solutions at the bottom of the page -->
+ Solutions at the bottom of the page 
 
-<a href="javascript:showhide('SolutionsHW')"
-style="font-size:.8em;">Integrated Autoregressive Model</a>
 
-::: {#SolutionsHW style="display:none;"}
 
-<!-- Check Your Understanding -->
+ Check Your Understanding 
 
-::: {.callout-tip icon=false title="Check Your Understanding"}
 
 Start with this fitted system of equations. Show that it can be written as
 $$
@@ -1433,26 +1330,19 @@ Combining like terms:
 \end{align*}
 
 This is a special case of the ARIMA models in Chapter 7.
-:::
 
-:::
-<!-- End of solution for Holt Winters Fitting -->
+ End of solution for Holt Winters Fitting 
 
 
 
 
-<!-- Solutions at the bottom of the page -->
+ Solutions at the bottom of the page 
 
-<a href="javascript:showhide('Solutions4')"
-style="font-size:.8em;">McDonald's Drift Parameter</a>
-
-::: {#Solutions4 style="display:none;"}
 
 Solutions to Class Activity
 
-<!-- Check Your Understanding -->
+ Check Your Understanding 
 
-::: {.callout-tip icon=false title="Check Your Understanding"}
 
 Use the McDonald's stock price data to do the following.
 
@@ -1463,7 +1353,7 @@ As seen above, there is no significant autocorrelation in the differences of the
 We now compute the mean and standard deviation of the differences.
 
 ```{r}
-#| echo: false
+
 
 mean_diff <- stock_ts$diff |> mean(na.rm = TRUE)
 sd_diff <- stock_ts$diff |> sd(na.rm = TRUE)
@@ -1519,11 +1409,6 @@ $$
 -   Is there evidence to suggest that the time series can be modeled as a random walk with drift? Why or why not?
 
 If this confidence contains 0, we cannot conclude that there is evidence of a positive drift in the price of McDonald's stock over the period.
-
-:::
-
-
-:::
 
 
 

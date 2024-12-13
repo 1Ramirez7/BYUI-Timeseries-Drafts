@@ -17,6 +17,8 @@ project:
     - data
     - exams
 
+freeze: auto
+
 website:
   title: "BYU-Idaho Time Series"
   favicon: images/TSFavicon.png

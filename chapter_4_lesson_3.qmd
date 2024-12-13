@@ -614,14 +614,9 @@ pacf(sim_ts$x, plot=TRUE, lag.max = 25)
 
 
 
-<a href="javascript:showhide('Solutions1')"
-style="font-size:.8em;">Autoregressive Model Definition</a>
-  
-::: {#Solutions1 style="display:none;"}
 
 Check your Understanding 
 
-::: {.callout-tip icon=false title="Check Your Understanding Solutions"}
 
 -   Show that we can write Equation (4.15) as a polynomial of order $p$ in terms of the backward shift operator:
 $$
@@ -734,19 +729,13 @@ $$\sum_{t=1}^n \left( \hat w_t \right)^2 = \sum_{t=1}^n \left( x_t - \hat x_t \r
 
   This is called an autoregressive model because we regress the current tern on the previous terms in the series.
 
-:::
-
-:::
 
 
 
 
-<a href="javascript:showhide('Solutions')"
-style="font-size:.8em;">Absolute Value</a>
-  
-::: {#Solutions2 style="display:none;"}
-    
-::: {.callout-tip icon=false title="Check Your Understanding Solutions"}
+
+
+Check Your Understanding Solutions
 
 Find the absolute value of the following (complex) numbers:
 
@@ -762,19 +751,12 @@ Find the absolute value of the following (complex) numbers:
 
 -   $|5-12i| = \sqrt{(5)^2 + (-12)^2} = 13$
 
-:::
-
-:::
 
 
 
 
-<a href="javascript:showhide('Solutions3')"
-style="font-size:.8em;">Using the Characteristic Polynomial to Assess Stationarity</a>
-  
-::: {#Solutions3 style="display:none;"}
-    
-::: {.callout-tip icon=false title="Check Your Understanding Solutions"}
+
+Check Your Understanding Solutions
 
 For each of the following AR processes, do the following:
 
@@ -895,9 +877,7 @@ $$
 $$ B = 2, ~ -2, ~ \frac{3}{2} $$
 This is a stationary AR process.
 
-:::
 
-:::
 
 
 
