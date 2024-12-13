@@ -129,7 +129,7 @@ $$
 $$
 where $z_t = x_t - \mu$ and $\mu$ is the mean of the time series.
 
-<!-- Check Your Understanding -->
+ Check Your Understanding 
 
 ::: {.callout-tip icon=false title="Check Your Understanding"}
 
@@ -231,7 +231,6 @@ We can easily obtain these residual values in R:
 ```{r}
 #| code-fold: true
 #| code-summary: "Show the code"
-#| include: false
 
 fit_ar |> residuals()
 ```
@@ -243,11 +242,10 @@ This is very close to the actual value used in the simulation: $\sigma^2 = 1$.
 
 
 
-<!-- Start of the next section -->
-<!-- These parameters are used in the simulation below -->
+ Start of the next section 
+ These parameters are used in the simulation below 
 
 ```{r}
-#| echo: false
 
 alpha0 <- 50
 alpha1 <- 0.75
@@ -334,7 +332,7 @@ tidy(fit_ar)
 The estimate of the parameter for the constant (mean) term $\alpha_0$ is $\hat \alpha_0 = `r tidy(fit_ar) |> filter(str_detect(term, "const")) |> select(estimate) |> pull() |> round(3)`$.
 The estimate of the parameter $\alpha_1$ (i.e. the fitted value of the parameter $\alpha_1$) is $\hat \alpha_1 = `r tidy(fit_ar) |> filter(str_detect(term, "ar1")) |> select(estimate) |> pull() |> round(3)`$. 
 
-<!-- Recall that the mean of the time series is subtracted from the data before the parameter values are estimated. To estimate the time series, start with the mean and then add the coefficient $\hat \alpha_1$ multiplied by the difference between $x_{t-1}$ and the mean. -->
+ Recall that the mean of the time series is subtracted from the data before the parameter values are estimated. To estimate the time series, start with the mean and then add the coefficient $\hat \alpha_1$ multiplied by the difference between $x_{t-1}$ and the mean. 
 
 Fitting the model
 $$
@@ -374,9 +372,8 @@ ci_summary <- tidy(fit_ar) |>
     )
 ```
 
-<!-- Beginning of two columns -->
-::: columns
-::: {.column width="45%"}
+ Beginning of two columns 
+
 
 95% Confidence Interval for $\alpha_0$:
 $$
@@ -405,13 +402,9 @@ $$
 The confidence interval for $\alpha_0$ contains 
 $$\alpha_0 = \mu - \alpha_1 ~ (\mu) = `r alpha0 * (1-alpha1)`$$
 
-:::
 
-::: {.column width="10%"}
-<!-- empty column to create gap -->
-:::
+ empty column to create gap 
 
-::: {.column width="45%"}
 
 95% Confidence Interval for $\alpha_1$:
 $$
@@ -440,9 +433,8 @@ $$
 The confidence interval for $\alpha_1$ contains 
 $$\alpha_1 = `r alpha1`$$
 
-:::
-:::
-<!-- End of two columns -->
+
+ End of two columns 
 
 Both intervals captured the true value used in the simulation. The process of estimating the parameter worked well. In practice, we will not know the value of $\alpha_1$, but the confidence interval gives us a reasonable estimate of the value.
 About 95% of the time, the confidence interval will capture the true parameter value.
@@ -469,7 +461,6 @@ The residuals in this model are computed as
 ```{r}
 #| code-fold: true
 #| code-summary: "Show the code"
-#| include: false
 
 fit_ar |> residuals()
 ```
@@ -488,7 +479,6 @@ The variance of the residuals is $`r fit_ar |> residuals() |> as_tibble() |> sel
 ### Simulate an $AR(2)$ Time Series
 
 ```{r}
-#| echo: false
 
 # Set parameters
 alpha0 <- 20
@@ -504,7 +494,7 @@ $$
 $$
 where $w_t$ is a discrete white noise process with variance $\sigma^2 = `r sigma_sqr`$.
 
-<!-- Check Your Understanding -->
+ Check Your Understanding 
 
 ::: {.callout-tip icon=false title="Check Your Understanding"}
 
@@ -516,12 +506,12 @@ $$
   x_t = \mu + \alpha_1 ~ ( x_{t-1} - \mu) + \alpha_2 ~ ( x_{t-2} - \mu) + w_t
 $$
     Identify the value of each of the coefficients ($\mu$, $\alpha_1$, and $\alpha_2$).
-<!-- Solution Solution Solution Solution Solution Solution -->
-<!-- \begin{align*} -->
-<!--   x_t  -->
-<!--     &= `r alpha0` + `r alpha1` ~ ( x_{t-1} - `r alpha0`) + `r alpha2` ~ ( x_{t-2} - `r alpha0`) + w_t \\ -->
-<!--     &= `r alpha0 - alpha1 * alpha0 - alpha2 * alpha0` + `r alpha1` ~ x_{t-1} + `r alpha2` ~ x_{t-2} + w_t -->
-<!-- \end{align*} -->
+ Solution Solution Solution Solution Solution Solution 
+ \begin{align*} 
+   x_t  
+     &= `r alpha0` + `r alpha1` ~ ( x_{t-1} - `r alpha0`) + `r alpha2` ~ ( x_{t-2} - `r alpha0`) + w_t \\ 
+     &= `r alpha0 - alpha1 * alpha0 - alpha2 * alpha0` + `r alpha1` ~ x_{t-1} + `r alpha2` ~ x_{t-2} + w_t 
+ \end{align*} 
 -   What is the mean of this $AR(2)$ process?
 
 :::
@@ -635,9 +625,7 @@ ci_summary <- tidy(fit_ar) |>
 
 
 
-<!-- Beginning of three columns -->
-::: columns
-::: {.column width="30%"}
+ Beginning of three columns 
 
 95% confidence interval for $\alpha_0$:
 $$
@@ -669,13 +657,8 @@ $$
 $$
 This confidence interval contains $\alpha_0 = `r alpha0 * (1 - alpha1 - alpha2)`$.
 
-:::
+ empty column to create gap 
 
-::: {.column width="5%"}
-<!-- empty column to create gap -->
-:::
-
-::: {.column width="30%"}
 
 95% confidence interval for $\alpha_1$:
 $$
@@ -707,13 +690,7 @@ $$
 $$
 This confidence interval contains $\alpha_1 = `r alpha1`$.
 
-:::
-
-::: {.column width="5%"}
-<!-- empty column to create gap -->
-:::
-
-::: {.column width="30%"}
+ empty column to create gap 
 
 95% confidence interval for $\alpha_2$:
 $$
@@ -745,10 +722,8 @@ $$
 $$
 This confidence interval contains $\alpha_2 = `r alpha2`$.
 
-:::
 
-:::
-<!-- End of three columns -->
+ End of three columns 
 
 All three confidence intervals contain the true parameter values we used for the simulation.
 
@@ -757,7 +732,7 @@ All three confidence intervals contain the true parameter values we used for the
 
 We can compute the residuals in the same manner as we did for the other models.
 
-<!-- Check Your Understanding -->
+ Check Your Understanding 
 
 ::: {.callout-tip icon=false title="Check Your Understanding"}
 
@@ -786,7 +761,7 @@ The variance of the residuals is `r fit_ar |> residuals() |> as_tibble() |> sele
 
 ## Small-Group Activity: Global Warming (20 min)
 
-<a id="GlobalWarming">The</a> time plot below illustrates the change in global 
+id=GlobalWarmingThe time plot below illustrates the change in global 
 surface temperature compared to the long-term average 
 observed from 1951 to 1980. (Source: NASA/GISS.)
 
@@ -814,7 +789,7 @@ temps_ts |> autoplot(.vars = change) +
 In the [previous lesson](https://byuistats.github.io/timeseries/chapter_4_lesson_3.html#pacfTable), we noted that the partial correlogram can be used to assess the number of parameters in an AR model.
 Here is a partial correlogram for the change in the mean annual global temperature.
 
-<!-- pacf(stock_ts$value, plot=TRUE, lag.max = 25) -->
+ pacf(stock_ts$value, plot=TRUE, lag.max = 25) 
 
 ```{r}
 #| code-fold: true
@@ -823,7 +798,7 @@ Here is a partial correlogram for the change in the mean annual global temperatu
 pacf(temps_ts$change)
 ```
 
-<!-- Check Your Understanding -->
+ Check Your Understanding 
 
 ::: {.callout-tip icon=false title="Check Your Understanding"}
 
@@ -864,7 +839,7 @@ R returned an
 $AR(`r tidy(global_ar) |> as_tibble() |> dplyr::select(term) |> tail(1) |> right(1)`)$ 
 model for this time series.
 
-<!-- Check Your Understanding -->
+ Check Your Understanding 
 
 ::: {.callout-tip icon=false title="Check Your Understanding"}
 
@@ -889,7 +864,7 @@ With the exception of a lone seemingly spurious autocorrelation, there are no si
 $AR(`r tidy(global_ar) |> as_tibble() |> dplyr::select(term) |> tail(1) |> right(1)`)$ 
 model. This suggests that the model accounts for the variation in the time series. 
 
-<!-- Check Your Understanding -->
+ Check Your Understanding 
 
 ::: {.callout-tip icon=false title="Check Your Understanding"}
 
@@ -897,10 +872,7 @@ model. This suggests that the model accounts for the variation in the time serie
 model you developed.
 -   Click on the link below to obtain a more precise version of the characteristic equation, then solve the characteristic equation by any method.
 
-<a href="javascript:showhide('CharacteristicEquation')"
-style="font-size:.8em;">Characteristic Equation</a>
 
-::: {#CharacteristicEquation style="display:none;"}
 
 ```{r}
 #| code-fold: true
@@ -919,7 +891,6 @@ cat(
 )
 ```
 
-:::
 
 -   Is our $AR(`r tidy(global_ar) |> as_tibble() |> dplyr::select(term) |> tail(1) |> right(1)`)$ 
 model stationary?
@@ -957,7 +928,7 @@ temps_forecast |>
 ```
 
 
-<!-- Check your Understanding -->
+ Check your Understanding 
 
 ::: {.callout-tip icon=false title="Check Your Understanding"}
 
@@ -1047,7 +1018,7 @@ The absolute value of the solutions of the characteristic equation are:
 polyroot(c(1, -alphas)) |> abs() |> round(3)
 ```
 
-<!-- Check Your Understanding -->
+ Check Your Understanding 
 
 ::: {.callout-tip icon=false title="Check Your Understanding"}
 
@@ -1097,7 +1068,7 @@ temps_forecast_book |>
     )
 ```
 
-<!-- Check Your Understanding -->
+ Check Your Understanding 
 
 ::: {.callout-tip icon=false title="Check Your Understanding"}
 
@@ -1125,25 +1096,13 @@ temps_forecast_book |>
 -   Clarify questions
 
 
-::: {.callout-note icon=false}
-
-## Download Homework
-
-<a href="https://byuistats.github.io/timeseries/homework/homework_4_4.qmd" download="homework_4_4.qmd"> homework_4_4.qmd </a>
-
-:::
 
 
 
 
 
-
-<a href="javascript:showhide('UsingPACFglobaltemps')"
-style="font-size:.8em;">Small-Group Activity: Global Warming--PACF</a>
   
-::: {#UsingPACFglobaltemps style="display:none;"}
-    
-::: {.callout-tip icon=false title="Check Your Understanding"}
+Check Your Understanding
 
 Working with your partner, do the following
 
@@ -1152,8 +1111,6 @@ Working with your partner, do the following
 **Solution:**
 
   $$p=3$$
-
-<hr></hr>
 
 
 -   Using the value of $p$ you identified, fit an $AR(p)$ model to the global temperature data. State the fitted $AR(p)$ model in the form 
@@ -1255,7 +1212,6 @@ Or, after substituting the fitted values:
     ~ x_{t-3} 
 \end{align*}
 
-<hr></hr>
 
 
 -   Obtain 95% confidence intervals for each of the parameters. Which are significantly different from zero?
@@ -1298,7 +1254,6 @@ The confidence intervals are:
 \end{align*}
 
 The parameters $\alpha_1$ and $\alpha_3$ are statistically significantly different from 0.
-<hr></hr>
 
 
 -   Give the first three residual values (skipping the NAs).
@@ -1311,9 +1266,6 @@ global_ar |>
   na.omit() |>
   head(3)
 ```
-
-
-<hr></hr>
 
 
 -   What is the estimate of $\sigma^2$?
@@ -1330,7 +1282,6 @@ resid_df <- global_ar |>
 var(resid_df$.resid, na.rm = TRUE) 
 ```
 
-<hr></hr>
 
 
 -   Make a correlogram for the residuals. Does it appear that your model has fully explained the variation in the temperatures?
@@ -1355,29 +1306,17 @@ residuals(global_ar) |>
 
 There is still a significant autocorrelation at lag $k=3$. This suggests a more sophisticated model may be necessary.
 
-<hr></hr>
 
-:::
-<!-- End of check your understanding -->
+ End of check your understanding 
 
-:::
-<!-- End of UsingPACFglobaltemps solutions -->
+
+ End of UsingPACFglobaltemps solutions 
 
 
 
-
-
-
-
-
-<a href="javascript:showhide('DynamicPglobaltemps')"
-style="font-size:.8em;">Small-Group Activity: Global Warming--Dynamic</a>
+  DynamicPglobaltemps
   
-::: {#DynamicPglobaltemps style="display:none;"}
-  
-<!-- Check Your Understanding -->
-
-::: {.callout-tip icon=false title="Check Your Understanding"}
+ Check Your Understanding 
 
 Working with your partner, do the following:
 
@@ -1413,8 +1352,6 @@ $$
     `r tidy(global_ar) |> filter(str_detect(term, "ar6")) |> select(estimate) |> pull() |> round(3)` ~ x_{t-6}
 $$
 
-<hr></hr>
-
 -   Obtain 95% confidence intervals for each of the parameters. Which are significantly different from zero?
 
 **Solution:**
@@ -1433,7 +1370,6 @@ ci_summary
 
 The constant term, $\alpha_1$, $\alpha_4$, and $\alpha_6$ are all statistically significantly different from zero.
 
-<hr></hr>
 
 
 -   Give the first three residual values (skipping the NAs).
@@ -1449,7 +1385,7 @@ residuals(global_ar) |>
   head(3)
 ```
 
-<hr></hr>
+
 
 -   What is the estimate of $\sigma^2$?
 
@@ -1471,7 +1407,7 @@ resid_var
 
 The estimate of $\sigma^2$ is $\hat \sigma^2 = `r resid_var |> round(3)`$.
 
-<hr></hr>
+
 
 -   Make a correlogram for the residuals. Does it appear that your model has fully explained the variation in the temperatures? Justify your answer.
 
@@ -1496,12 +1432,10 @@ residuals(global_ar) |>
 
 There is only one significant autocorrelation: $k=34$. This is probably a Type I error, which should occur 5% of the time. None of the other autocorrelations are significant--particularly among the smaller values of $k$. It appears that this model has fully explained the variation in the temperatures.
 
-<hr></hr>
 
-:::
 
-:::
-<!-- End of DynamicPglobaltemps solutions -->
+
+ End of DynamicPglobaltemps solutions 
 
 
 
@@ -1511,15 +1445,14 @@ There is only one significant autocorrelation: $k=34$. This is probably a Type I
 
 
 
-<a href="javascript:showhide('CharacteristicFunction')"
-style="font-size:.8em;">Stationarity of the $AR(`r tidy(global_ar) |> as_tibble() |> dplyr::select(term) |> tail(1) |> right(1)`)$ 
-model</a>
+Stationarity of the $AR(`r tidy(global_ar) |> as_tibble() |> dplyr::select(term) |> tail(1) |> right(1)`)$ 
+model
 
-::: {#CharacteristicFunction style="display:none;"}
+CharacteristicFunction
 
-<!-- Check Your Understanding -->
+ Check Your Understanding 
 
-::: {.callout-tip icon=false title="Check Your Understanding"}
+
 
 -   Write the characteristic equation for the $AR(`r tidy(global_ar) |> as_tibble() |> dplyr::select(term) |> tail(1) |> right(1)`)$ 
 model you developed.
@@ -1528,7 +1461,6 @@ model you developed.
 **Solution:**
 
 ```{r}
-#| echo: false
 
 alphas <- global_ar |> coefficients() |> tail(-1) |> dplyr::select(estimate) |> pull() |> round(3)
 cat(
@@ -1543,7 +1475,7 @@ cat(
 )
 ```
 
-<hr></hr>
+
 
 
 -   Obtain a more precise version of the characteristic equation, then solve the characteristic equation by any method.
@@ -1571,7 +1503,7 @@ alphas <- global_ar |> coefficients() |> tail(-1) |> dplyr::select(estimate) |> 
 polyroot(c(1, -alphas))
 ```
 
-<hr></hr>
+
 
 
 
@@ -1585,11 +1517,3 @@ abs(polyroot(c(1, -alphas)))
 ```
 
 Not all of the roots are greater than 1 in absolute value. So, this AR process is not stationary.
-
-<hr></hr>
-
-:::
-
-
-:::
-
