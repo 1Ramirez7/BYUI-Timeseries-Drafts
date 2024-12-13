@@ -78,7 +78,7 @@ The error terms $z_t$ have mean 0, but they do not need to follow any particular
 
 With a partner, practice determining which models are linear and which are non-linear.
 
-<!-- Check your Understanding -->
+ Check your Understanding 
 
 ::: {.callout-tip icon=false title="Check Your Understanding"}
 
@@ -142,7 +142,7 @@ $$
 
 ### Stationarity of Linear Models
 
-<!-- Check your Understanding -->
+ Check your Understanding 
 
 ::: {.callout-tip icon=false title="Check Your Understanding"}
 
@@ -791,7 +791,7 @@ chocolate_forecast |>
 
 
 
-<!-- Beginning of two columns -->
+ Beginning of two columns 
 ::: columns
 ::: {.column width="45%"}
 
@@ -809,7 +809,7 @@ new_dat |>
 :::
 
 ::: {.column width="10%"}
-<!-- empty column to create gap -->
+ empty column to create gap 
 :::
 
 ::: {.column width="45%"}
@@ -818,7 +818,7 @@ new_dat |>
 
 :::
 :::
-<!-- End of two columns -->
+ End of two columns 
 
 
 
@@ -831,12 +831,16 @@ Recall the monthly U.S. retail sales data. We will consider the total retail sal
 # Read in Women's Clothing Retail Sales data
 retail_ts <- rio::import("https://byuistats.github.io/timeseries/data/retail_by_business_type.parquet") |>
   filter(naics == 44812) |>
+  mutate(month = yearmonth(as.Date(month, origin = "1970-01-01"))) |> # added this to fix error. this data is common for this type of month format
+  mutate(month = yearmonth(month)) |> # added to fix error
   filter(month >= yearmonth(my("Jan 2004")) & month <= yearmonth(my("Dec 2006"))) |>
   mutate(month_seq = 1:n()) |>
   mutate(year = year(month)) |>
   mutate(month_num = month(month)) |>
   as_tsibble(index = month)
 ```
+
+
 
 
 ```{r}
@@ -939,7 +943,7 @@ $$
 where $t = 1, 2, 3, \ldots, `r number_of_years * 12 - 1`, `r number_of_years * 12`$.
 
 
-<!-- Check Your Understanding -->
+ Check Your Understanding 
 
 ::: {.callout-tip icon=false title="Check Your Understanding"}
 
@@ -967,6 +971,7 @@ to do the following:
 #| label: tbl-retailWomensClothingTable
 #| tbl-cap: "Table used to compute the estimate of the women's clothing retail sales time series using a linear model with seasonal indicator variables."
 
+
 retail_df1 <- retail_ts |>
   as_tibble() |>
   mutate(month_text = format(month, "%b %Y")) |>
@@ -988,14 +993,14 @@ retail_df2 <- retail_df1 |>
 
 retail_pred_df <- rio::import("data/retail_by_business_type.parquet") |>
   filter(naics == 44812) |>
+  mutate(month = yearmonth(as.Date(month, origin = "1970-01-01"))) |>  # Convert month
   filter(month >= yearmonth(my("Jan 2007")) & month <= yearmonth(my("Jun 2007"))) |>
   mutate(month_seq = (1:n()) + nrow(retail_df1)) |>
   mutate(year = year(month)) |>
   mutate(month_num = month(month)) |>
   mutate(month_text = format(month, "%b %Y")) |>
   as_tibble() |>
-  mutate(month_text = format(month, "%b %Y")) |>
-  rename(t = month_seq) |>
+  rename(t = month_seq) |> # Rename for clarity
   dplyr::select(month_text, month_num, t, sales_millions) |>
   mutate(
     alpha1_t = slope_retail * t,
@@ -1005,16 +1010,22 @@ retail_pred_df <- rio::import("data/retail_by_business_type.parquet") |>
     sales_millions = as.integer(NA),
     deviation = as.numeric(NA)
   ) |>
-  left_join(retail_df2 |> select(month_num, mean_deviation) |> unique(), by = join_by(month_num))  |>
-  dplyr::select(month_text, t, #month_num, 
-                sales_millions, alpha1_t, deviation, mean_deviation)
+  left_join(
+    retail_df2 |> 
+      dplyr::select(month_num, mean_deviation) |> # Properly select columns
+      distinct(),  # Remove duplicates before joining
+    by = "month_num"
+  ) |>
+  dplyr::select(month_text, t, sales_millions, alpha1_t, deviation, mean_deviation)
+
+
 
 retail_df3 <- retail_df2 |>
   dplyr::select(month_text, t, #month_num, 
                 sales_millions, alpha1_t, deviation, mean_deviation) |>
   bind_rows(retail_pred_df) |>
   mutate(estimate = alpha1_t + mean_deviation) |>
-  replace_na_with_char(emdash) |>
+#  replace_na_with_char(emdash) |> remove this to show results
   rename(
     "$$Date$$" = month_text,
     "$$t$$" = t,
@@ -1026,14 +1037,11 @@ retail_df3 <- retail_df2 |>
     "$$\\hat x_t$$" = estimate
   )
 
-retail_df3 |>
-  replace_cells_with_char(rows = c(2, 14, 26), cols = 6:7)  |>
-  replace_cells_with_char(rows = c(3:5, 15:17, 27:29), cols = 4:7) |>
-  replace_cells_with_char(rows = 38, cols = 6:7) |>
-  replace_cells_with_char(rows = 39:41, cols = c(4,6:7)) |>
-  display_table() |>
-  column_spec(1:3, width_min = "0.35in") |>
-  column_spec(4:ncol(retail_df3), width_min = "1in")
+retail_df3 |> 
+  kableExtra::kable() |>
+  kableExtra::column_spec(1:3, width_min = "0.35in") |>
+  kableExtra::column_spec(4:ncol(retail_df3), width_min = "1in")
+
 
 ```
 :::
@@ -1053,53 +1061,35 @@ retail_df3 |>
 
 
 
-::: {.callout-note icon=false}
-
-## Download Homework
-
-<a href="https://byuistats.github.io/timeseries/homework/homework_5_1.qmd" download="homework_5_1.qmd"> homework_5_1.qmd </a>
-
-:::
 
 
 
 
 
-<a href="javascript:showhide('Solutions1')"
-style="font-size:.8em;">Retail Sales</a>
   
-::: {#Solutions1 style="display:none;"}
+# Solutions1
     
 ```{r}
-#| echo: false
 
 retail_df3 |>
   display_table("0.75in")
 ```
 
-:::
 
 
 
 
-<!-- <a href="javascript:showhide('Solutions')" -->
-<!-- style="font-size:.8em;">Class Activity</a> -->
-
-<!-- ::: {#Solutions2 style="display:none;"} -->
-
-
-<!-- ::: -->
+# Solutions2
 
 
 
 
-<!-- <a href="javascript:showhide('Solutions3')" -->
-<!-- style="font-size:.8em;">Class Activity</a> -->
-
-<!-- ::: {#Solutions3 style="display:none;"} -->
 
 
-<!-- ::: -->
+# Solutions3 
+
+
+
 
 
 
