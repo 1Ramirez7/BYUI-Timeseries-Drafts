@@ -8,22 +8,9 @@ sidebar: false
 
 
 
+  This could be broken into two lessons: One for theory and other for fitting & forecasting. 
+  It was too rushed as one lesson.
 
-
-<!-- # -->
-<!-- # -->
-<!-- # -->
-<!-- # -->
-<!-- # -->
-<!-- # -->
-<!-- #   This could be broken into two lessons: One for theory and other for fitting & forecasting. -->
-<!-- #   It was too rushed as one lesson. -->
-<!-- # -->
-<!-- # -->
-<!-- # -->
-<!-- # -->
-<!-- # -->
-<!-- # -->
 
 
 
@@ -208,7 +195,7 @@ For an $AR(p)$ or $MA(q)$ process, we observe the following:
 
 </center>
 
-<!-- https://people.cs.pitt.edu/~milos/courses/cs3750/lectures/class16.pdf -->
+https://people.cs.pitt.edu/~milos/courses/cs3750/lectures/class16.pdf 
 
 :::
 
@@ -448,7 +435,7 @@ reduced5_linear_lm |>
 ```
 
 
-<!-- Check Your Understanding -->
+ Check Your Understanding 
 
 ::: {.callout-tip icon=false title="Check Your Understanding"}
 
@@ -482,7 +469,6 @@ model_resid |>
 
 
 ```{r}
-#| echo: false
 
 # model_best |>
 #   residuals() |>
@@ -651,7 +637,7 @@ elec_plot_log <- elec_ts |>
 elec_plot_raw | elec_plot_log
 ```
 
-<!-- Check Your Understanding -->
+ Check Your Understanding 
 
 ::: {.callout-tip icon=false title="Check Your Understanding"}
 
@@ -659,9 +645,9 @@ Use the Texas industrial electricity consumption data to do the following.
 
 -   Select an appropriate model to fit the time series using the AIC, AICc, or BIC critera.
 -   Determine the best $ARMA(p,q)$ model for the residuals.
-<!-- -   Forecast the data for the next 5 years using the regression model. -->
-<!-- -   Forecast the residuals for the next 5 years using ARMA model. -->
-<!-- -   Sum the two forecasted time series and plot the combined series against the original retail sales data. -->
+ -   Forecast the data for the next 5 years using the regression model. # not part of original
+ -   Forecast the residuals for the next 5 years using ARMA model. # not part of original
+ -   Sum the two forecasted time series and plot the combined series against the original retail sales data. # not part of original
 
 :::
 
@@ -672,7 +658,7 @@ Use the Texas industrial electricity consumption data to do the following.
 
 Apply what you have learned in this lesson to the retail sales data. In particular, consider full-service restaurants (NAICS code 722511). 
 
-<!-- Check Your Understanding -->
+ Check Your Understanding 
 
 ::: {.callout-tip icon=false title="Check Your Understanding"}
 
@@ -986,25 +972,6 @@ model_resid |>
 
 
 
-
-
-
-
-## Homework Preview (5 min)
-
--   Review upcoming homework assignment
--   Clarify questions
-
-
-
-
-::: {.callout-note icon=false}
-
-## Download Homework
-
-<a href="https://byuistats.github.io/timeseries/homework/homework_6_2.qmd" download="homework_6_2.qmd"> homework_6_2.qmd </a>
-
-:::
 
 
 
